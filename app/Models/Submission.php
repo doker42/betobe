@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\SubmissionNotSavedEvent;
 use App\Events\SubmissionSavedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,13 @@ class Submission extends Model
         'message'
     ];
 
+
+    /**
+     *  Used pattern "Fat models"
+     *
+     * @param array $submissionData
+     * @return void
+     */
     public static function createOne(array $submissionData)
     {
         try {
@@ -38,20 +46,8 @@ class Submission extends Model
         } catch (\Exception $e) {
 
             Log::info('Submission error: ' . $e->getMessage());
-
         }
 
-        // I used simple mail-notification
-
-        $name  = $submissionData['name'];
-        $email = $submissionData['email'];
-        $body  = $name . ', your submission have not been saved.';
-        $subject = 'Your submissions';
-
-        Mail::raw($body, function ($message) use ($email, $subject) {
-            $message->to($email)
-                ->subject($subject);
-        });
-
+        event(new SubmissionNotSavedEvent($submissionData));
     }
 }

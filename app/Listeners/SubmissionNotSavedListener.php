@@ -4,17 +4,16 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SubmissionSavedListener
+class SubmissionNotSavedListener
 {
     /**
      * Create the event listener.
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
@@ -22,11 +21,11 @@ class SubmissionSavedListener
      */
     public function handle(object $event): void
     {
-        // used very simple email notification
+        // I used simple mail-notification
 
-        $name  = $event->submission->name;
-        $email = $event->submission->email;
-        $body = $name . ', your submission have been successfully saved.';
+        $name  = $event->submissionData['name'];
+        $email = $event->submissionData['email'];
+        $body  = $name . ', your submission have not been saved.';
         $subject = 'Your submissions';
 
         Mail::raw($body, function ($message) use ($email, $subject) {

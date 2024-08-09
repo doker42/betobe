@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\SubmissionNotSavedEvent;
 use App\Events\SubmissionSavedEvent;
+use App\Listeners\SubmissionNotSavedListener;
 use App\Listeners\SubmissionSavedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         SubmissionSavedEvent::class => [
             SubmissionSavedListener::class
-        ]
+        ],
+        SubmissionNotSavedEvent::class => [
+            SubmissionNotSavedListener::class
+        ],
     ];
 
     /**

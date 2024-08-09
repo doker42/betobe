@@ -76,7 +76,7 @@ php artisan migrate
 
 ### routes for test API (postman):
 
-POST   {domain}/api/v1/submissions    name,email,message (all required)
+POST   {domain}/api/v1/submit              params:   name,email,message (all required)
 
 {
 "name": "John Doe",
