@@ -23,7 +23,7 @@ class SubmissionsTest extends TestCase
             'message' => 'test submission text',
         ];
 
-        $end_point = '/api/v1/submissions';
+        $end_point = '/api/v1/submit';
 
         $response = $this->post($end_point, $submission);
 
