@@ -13,7 +13,7 @@ class SubmissionStoreJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected array $submissionData;
+    public array $submissionData;
 
     /**
      * Create a new job instance.
